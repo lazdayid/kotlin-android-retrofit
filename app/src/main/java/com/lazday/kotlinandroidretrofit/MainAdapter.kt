@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.adapter_main.view.*
 import kotlin.collections.ArrayList
 
-class MainAdapter (val context: Context, var photos: ArrayList<MainModel>):
+class MainAdapter (var photos: ArrayList<MainModel>, val listener: OnAdapterListener):
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder (
@@ -19,19 +19,20 @@ class MainAdapter (val context: Context, var photos: ArrayList<MainModel>):
     override fun getItemCount() = photos.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(photos[position])
+        val photo = photos[position]
+        holder.view.textView.text = photo.title
+        holder.view.setOnClickListener { listener.onClick( photo ) }
     }
 
-    class ViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val view = view
-        fun bind(photo: MainModel){
-            view.textView.text = photo.title
-        }
-    }
+    class ViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     fun setPhotos(photos: List<MainModel>){
         this.photos.clear()
         this.photos.addAll(photos)
         notifyDataSetChanged()
+    }
+
+    interface OnAdapterListener {
+        fun onClick(photo: MainModel)
     }
 }

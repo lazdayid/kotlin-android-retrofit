@@ -1,5 +1,6 @@
 package com.lazday.kotlinandroidretrofit
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,7 +30,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView(){
-        mainAdapter = MainAdapter(this, arrayListOf())
+        mainAdapter = MainAdapter(arrayListOf(), object : MainAdapter.OnAdapterListener {
+            override fun onClick(photo: MainModel) {
+                startActivity(
+                    Intent(this@MainActivity, DetailActivity::class.java)
+                        .putExtra("intent_title", photo.title)
+                        .putExtra("intent_image", photo.url)
+                )
+            }
+
+        })
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = mainAdapter
