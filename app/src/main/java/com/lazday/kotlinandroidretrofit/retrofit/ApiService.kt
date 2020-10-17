@@ -1,4 +1,4 @@
-package com.lazday.covid_19.retrofit
+package com.lazday.kotlinandroidretrofit.retrofit
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
 
-    var BASE_URL:String="https://jsonplaceholder.typicode.com/"
+    var BASE_URL:String="https://demo.lazday.com/rest-api-sample/"
     val endpoint: ApiEndpoint
         get() {
             val interceptor = HttpLoggingInterceptor()
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+            interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
             val retrofit = Retrofit.Builder()

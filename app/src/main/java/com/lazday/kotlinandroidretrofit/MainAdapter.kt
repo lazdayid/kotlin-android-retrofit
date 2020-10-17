@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.adapter_main.view.*
 import kotlin.collections.ArrayList
 
-class MainAdapter (var photos: ArrayList<MainModel>, val listener: OnAdapterListener):
+class MainAdapter (var results: ArrayList<MainModel.Result>, val listener: OnAdapterListener):
     RecyclerView.Adapter<MainAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder (
@@ -16,27 +16,28 @@ class MainAdapter (var photos: ArrayList<MainModel>, val listener: OnAdapterList
                     parent, false)
     )
 
-    override fun getItemCount() = photos.size
+    override fun getItemCount() = results.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val photo = photos[position]
-        holder.view.textView.text = photo.title
+        val result = results[position]
+        holder.view.textView.text = result.title
         Glide.with(holder.view)
-            .load(photo.url)
+            .load(result.image)
             .placeholder(R.drawable.img_placeholder)
+            .centerCrop()
             .into(holder.view.imageView)
-        holder.view.setOnClickListener { listener.onClick( photo ) }
+        holder.view.setOnClickListener { listener.onClick( result ) }
     }
 
     class ViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
-    fun setPhotos(photos: List<MainModel>){
-        this.photos.clear()
-        this.photos.addAll(photos)
+    fun setData(data: List<MainModel.Result>){
+        this.results.clear()
+        this.results.addAll(data)
         notifyDataSetChanged()
     }
 
     interface OnAdapterListener {
-        fun onClick(photo: MainModel)
+        fun onClick(result: MainModel.Result)
     }
 }
