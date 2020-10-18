@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                         .putExtra("intent_image", result.image)
                 )
             }
-
         })
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
@@ -62,7 +61,6 @@ class MainActivity : AppCompatActivity() {
                         showResult( response.body()!! )
                     }
                 }
-
             })
     }
 

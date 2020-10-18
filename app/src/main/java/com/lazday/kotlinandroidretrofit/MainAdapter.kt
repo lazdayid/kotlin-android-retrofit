@@ -24,6 +24,7 @@ class MainAdapter (var results: ArrayList<MainModel.Result>, val listener: OnAda
         Glide.with(holder.view)
             .load(result.image)
             .placeholder(R.drawable.img_placeholder)
+            .error(R.drawable.img_placeholder)
             .centerCrop()
             .into(holder.view.imageView)
         holder.view.setOnClickListener { listener.onClick( result ) }
