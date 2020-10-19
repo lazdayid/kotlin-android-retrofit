@@ -7,5 +7,5 @@ import retrofit2.http.*
 interface ApiEndpoint {
 
     @GET("data.php")
-    fun getPhotos(): Call<MainModel>
+    fun data(): Call<MainModel>
 }
