@@ -15,21 +15,18 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
     private val TAG: String = "MainActivity"
 
-    private lateinit var mainAdapter: MainAdapter
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar!!.title = "Avengers"
         setupRecyclerView()
-    }
-
-    override fun onStart() {
-        super.onStart()
         getDataFromApi()
     }
 
     private fun setupRecyclerView(){
-        mainAdapter = MainAdapter(arrayListOf(), object : MainAdapter.OnAdapterListener {
+        movieAdapter = MovieAdapter(arrayListOf(), object : MovieAdapter.OnAdapterListener {
             override fun onClick(result: MainModel.Result) {
                 startActivity(
                     Intent(this@MainActivity, DetailActivity::class.java)
@@ -40,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         })
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = mainAdapter
+            adapter = movieAdapter
         }
     }
 
@@ -77,6 +74,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun showResult(results: MainModel) {
         for (result in results.result) printLog( "title: ${result.title}" )
-        mainAdapter.setData( results.result )
+        movieAdapter.setData( results.result )
     }
 }
