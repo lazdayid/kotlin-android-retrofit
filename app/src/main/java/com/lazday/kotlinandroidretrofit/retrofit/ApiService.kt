@@ -7,7 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiService {
 
-    var BASE_URL:String="https://demo.lazday.com/rest-api-sample/"
+//    var BASE_URL:String="https://demo.lazday.com/rest-api-sample/"
+    var BASE_URL:String="http://10.0.2.2:8080/lazday/"
     val endpoint: ApiEndpoint
         get() {
             val retrofit = Retrofit.Builder()

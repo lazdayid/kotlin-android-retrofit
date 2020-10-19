@@ -8,4 +8,7 @@ interface ApiEndpoint {
 
     @GET("data.php")
     fun data(): Call<MainModel>
+
+    @GET("movie")
+    fun movie(): Call<MainModel>
 }
