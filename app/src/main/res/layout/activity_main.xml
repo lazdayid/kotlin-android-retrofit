@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@android:color/darker_gray"
-        tools:listitem="@layout/adapter_main"
+        tools:listitem="@layout/adapter_movie"
         />
 
     <ProgressBar
