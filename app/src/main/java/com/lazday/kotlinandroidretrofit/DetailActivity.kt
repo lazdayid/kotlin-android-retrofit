@@ -16,6 +16,7 @@ class DetailActivity : AppCompatActivity() {
         Glide.with(this)
             .load(intentImage )
             .placeholder(R.drawable.img_placeholder)
+            .error(R.drawable.img_placeholder)
             .into(imageView)
     }
 }
