@@ -22,7 +22,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         supportActionBar!!.title = "Avengers"
         setupRecyclerView()
-        getDataFromApi()
+//        getDataFromApi()
+        lazdayMovie()
+    }
+
+    private fun lazdayMovie(){
+        showLoading(true)
+        ApiService.endpoint.movie()
+            .enqueue(object : Callback<MainModel> {
+                override fun onFailure(call: Call<MainModel>, t: Throwable) {
+                    printLog( t.toString() )
+                    showLoading(false)
+                }
+                override fun onResponse(
+                    call: Call<MainModel>,
+                    response: Response<MainModel>
+                ) {
+                    showLoading(false)
+                    if (response.isSuccessful) {
+                        showResult( response.body()!! )
+                    }
+                }
+            })
     }
 
     private fun setupRecyclerView(){
