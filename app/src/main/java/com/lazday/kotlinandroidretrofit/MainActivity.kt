@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getDataFromApi(){
         showLoading(true)
-        ApiService.endpoint.getPhotos()
+        ApiService.endpoint.data()
             .enqueue(object : Callback<MainModel> {
                 override fun onFailure(call: Call<MainModel>, t: Throwable) {
                     printLog( t.toString() )
